@@ -1,0 +1,36 @@
+{
+    "manifest_version": 3,
+    "name": "Poe.com Resizer",
+    "version": "1.0",
+    "description": "Better layout for Poe.com and allow for resizable dialog area",
+    "permissions": [
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*.poe.com/*"],
+            "js": ["inject.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "client.js"
+            ],
+            "matches": ["https://*.poe.com/*"]
+        }
+    ]
+}
