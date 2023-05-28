@@ -1,11 +1,8 @@
 {
     "manifest_version": 3,
     "name": "Poe.com Resizer",
-    "version": "1.0",
+    "version": "1.1",
     "description": "Better layout for Poe.com and allow for resizable dialog area",
-    "permissions": [
-        "scripting"
-    ],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
