@@ -6,7 +6,7 @@ const HUMAN_BUBBLE = '.Message_humanMessageBubble__Nld4j';
 const outerStyle = document.createElement('style');
 
 function addResizeHandle() {
-    // Wait for 50ms to ensure eveything is loaded
+    // Wait for 100ms to ensure eveything is loaded
     setTimeout(() => {
         const outerBox = document.querySelector(OUTER_CONTAINER);
         if (outerBox.lastElementChild.id !== 'resize-handle') {
@@ -14,14 +14,14 @@ function addResizeHandle() {
             const handleDot = document.createElement('div');
             handleDot.style.height = '38px';
             handleDot.style.width = '4px';
-            handleDot.style.background = '#eaeaea';
+            handleDot.style.background = '#ececec';
             handleDot.style.borderRadius = '2px';
             handleDot.style.margin= 'calc(50vh - 38px) auto';
 
             const handle = document.createElement('div');
             handle.style.height = '100vh';
             handle.style.width = '12px';
-            handle.style.background = '#5d5bc2';
+            handle.style.background = '#7676d0';
             handle.style.cursor = 'ew-resize';
             handle.id = 'resize-handle';
             handle.appendChild(handleDot);
@@ -48,7 +48,7 @@ function addResizeHandle() {
                 isDragging = false;
             });
         }
-    }, 50);
+    }, 100);
 }
 
 // Apply the layout change onload
