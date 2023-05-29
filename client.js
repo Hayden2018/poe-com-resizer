@@ -3,33 +3,11 @@ const CONTAINER = '.PageWithSidebarLayout_mainSection__i1yOg';
 const BOT_BUBBLE = '.Message_botMessageBubble__CPGMI';
 const HUMAN_BUBBLE = '.Message_humanMessageBubble__Nld4j';
 
-function removeMaxWidthStyle(className, parentElement) {
-    const dialogs = parentElement.querySelectorAll(className);
-    dialogs.forEach(element => {
-        element.style.maxWidth = 'unset';
-    });
-}
+const outerStyle = document.createElement('style');
 
-function addResizer() {
-    // Wait for 100ms to ensure eveything is loaded
+function addResizeHandle() {
+    // Wait for 50ms to ensure eveything is loaded
     setTimeout(() => {
-        const dialogArea = document.querySelector(CONTAINER);
-        dialogArea.style.maxWidth = 'unset';
-        removeMaxWidthStyle(BOT_BUBBLE, dialogArea);
-        removeMaxWidthStyle(HUMAN_BUBBLE, dialogArea);
-
-        // Handle any upcoming dialog bubble
-        const observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                if (mutation.addedNodes.length > 0) {
-                    removeMaxWidthStyle(BOT_BUBBLE, dialogArea);
-                    removeMaxWidthStyle(HUMAN_BUBBLE, dialogArea);
-                }
-            });
-        });
-        observer.observe(document, { childList: true, subtree: true });
-
-        // Add a resize handle if it there is not one
         const outerBox = document.querySelector(OUTER_CONTAINER);
         if (outerBox.lastElementChild.id !== 'resize-handle') {
 
@@ -43,7 +21,7 @@ function addResizer() {
             const handle = document.createElement('div');
             handle.style.height = '100vh';
             handle.style.width = '12px';
-            handle.style.background = '#6e6dc0';
+            handle.style.background = '#5d5bc2';
             handle.style.cursor = 'ew-resize';
             handle.id = 'resize-handle';
             handle.appendChild(handleDot);
@@ -51,33 +29,42 @@ function addResizer() {
             outerBox.appendChild(handle);
             let isDragging = false;
             let startX;
+            let baseX;
             
             handle.addEventListener('mousedown', function (e) {
                 isDragging = true;
                 startX = e.clientX;
+                baseX = outerBox.clientWidth;
             });
             
             document.addEventListener('mousemove', function (e) {
                 if (isDragging) {
-                    const newWidth = outerBox.clientWidth + 2 * (e.clientX - startX);
-                    outerBox.style.maxWidth = newWidth + 'px';
-                    startX = e.clientX;
+                    const newWidth = baseX + 2 * (e.clientX - startX);
+                    outerStyle.textContent = `${OUTER_CONTAINER} { max-width: ${newWidth}px }`;
                 }
             });
             
             document.addEventListener('mouseup', function () {
                 isDragging = false;
-            }); 
+            });
         }
-    }, 100);
+    }, 50);
 }
 
-// Apply the layout change onload and navigation to new page
+// Apply the layout change onload
 window.onload = () => {
-    addResizer();
+    addResizeHandle();
     const pushState = history.pushState;
+    const style = document.createElement('style');
+    style.textContent = `
+        ${CONTAINER} { max-width: none }
+        ${BOT_BUBBLE} { max-width: none }
+        ${HUMAN_BUBBLE} { max-width: none }
+    `;
+    document.head.appendChild(style);
+    document.head.appendChild(outerStyle);
     window.history.pushState = function() {
-        addResizer();
+        addResizeHandle();
         return pushState.apply(history, arguments);
     };
 }
