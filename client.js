@@ -15,13 +15,15 @@ function addResizeHandle() {
             handleDot.style.height = '38px';
             handleDot.style.width = '4px';
             handleDot.style.background = '#eaeaea';
+            // handleDot.style.background = '#fafafa';
             handleDot.style.borderRadius = '2px';
             handleDot.style.margin= 'calc(50vh - 38px) auto';
 
             const handle = document.createElement('div');
             handle.style.height = '100vh';
             handle.style.width = '12px';
-            handle.style.background = '#5d5bc2';
+            // handle.style.background = '#8080db';
+            handle.style.background = '#5555be';
             handle.style.cursor = 'ew-resize';
             handle.id = 'resize-handle';
             handle.appendChild(handleDot);
