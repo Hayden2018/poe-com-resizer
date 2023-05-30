@@ -13,14 +13,14 @@ function addResizeHandle() {
 
             const handleDot = document.createElement('div');
             handleDot.style.height = '38px';
-            handleDot.style.width = '4px';
+            handleDot.style.width = '5px';
             handleDot.style.background = '#ececec';
             handleDot.style.borderRadius = '2px';
-            handleDot.style.margin= 'calc(50vh - 38px) auto';
+            handleDot.style.margin= 'calc(50vh - 38px) 3px';
 
             const handle = document.createElement('div');
             handle.style.height = '100vh';
-            handle.style.width = '12px';
+            handle.style.width = '11px';
             handle.style.background = '#7676d0';
             handle.style.cursor = 'ew-resize';
             handle.id = 'resize-handle';
@@ -60,6 +60,7 @@ window.onload = () => {
         ${CONTAINER} { max-width: none }
         ${BOT_BUBBLE} { max-width: none }
         ${HUMAN_BUBBLE} { max-width: none }
+        ${OUTER_CONTAINER} { min-width: 640px }
     `;
     document.head.appendChild(style);
     document.head.appendChild(outerStyle);
