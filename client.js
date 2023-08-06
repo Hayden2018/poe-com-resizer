@@ -1,5 +1,6 @@
 const OUTER_CONTAINER = '.PageWithSidebarLayout_centeredPage__D42BU';
 const CONTAINER = '.PageWithSidebarLayout_mainSection__i1yOg';
+const INNER_CONTAINER = '.ChatPageMain_container__1aaCT.ChatPageMain_narrowChatPage__fWwXM';
 const BOT_BUBBLE = '.Message_botMessageBubble__CPGMI';
 const HUMAN_BUBBLE = '.Message_humanMessageBubble__Nld4j';
 
@@ -57,10 +58,14 @@ window.onload = () => {
     const pushState = history.pushState;
     const style = document.createElement('style');
     style.textContent = `
+        ${OUTER_CONTAINER} { 
+            min-width: 800px;
+            max-width: 1440px;
+        }
         ${CONTAINER} { max-width: none }
+        ${INNER_CONTAINER} { max-width: none }
         ${BOT_BUBBLE} { max-width: none }
         ${HUMAN_BUBBLE} { max-width: none }
-        ${OUTER_CONTAINER} { min-width: 640px }
     `;
     document.head.appendChild(style);
     document.head.appendChild(outerStyle);
