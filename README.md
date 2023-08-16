@@ -11,7 +11,7 @@ Poe.com Resizer is a Chrome extension that enables interactive resizing of the c
 
 You can install the Poe.com Resizer extension from the Chrome Web Store:
 
-[**Install Poe.com Resizer from Chrome Web Store**](https://chrome.google.com/webstore/detail/placeholder)
+[**Install Poe.com Resizer from Chrome Web Store**](https://chrome.google.com/webstore/detail/poecom-resizer/pkkdjnobfambcickbmbmpgejnelalmjo)
 
 ## Demo
 
