@@ -1,16 +1,24 @@
-const OUTER_CONTAINER = '.PageWithSidebarLayout_centeredPage__D42BU';
-const CONTAINER = '.PageWithSidebarLayout_mainSection__i1yOg';
+const OUTER_CONTAINER = '.SidebarLayout_layoutWrapper__P7Wz9';
+const CONTAINER = '.MainColumn_column__z1_q8';
 const INNER_CONTAINER = '.ChatPageMain_container__1aaCT.ChatPageMain_narrowChatPage__fWwXM';
 const BOT_BUBBLE = '.Message_botMessageBubble__CPGMI';
 const HUMAN_BUBBLE = '.Message_humanMessageBubble__Nld4j';
 
 const outerStyle = document.createElement('style');
+let retryInterval;
 
 function addResizeHandle() {
-    // Wait for 100ms to ensure eveything is loaded
-    setTimeout(() => {
+
+    retryInterval = setInterval(() => {
+
         const outerBox = document.querySelector(OUTER_CONTAINER);
+        if (!outerBox) return;
+        
         if (outerBox.lastElementChild.id !== 'resize-handle') {
+            clearInterval(retryInterval);
+
+            const existingHandle = document.querySelector('#resize-handle');
+            if (existingHandle) existingHandle.remove();
 
             const handleDot = document.createElement('div');
             handleDot.style.height = '38px';
@@ -49,27 +57,29 @@ function addResizeHandle() {
                 isDragging = false;
             });
         }
-    }, 100);
+    }, 20);
 }
 
 // Apply the layout change onload
 window.onload = () => {
-    addResizeHandle();
     const pushState = history.pushState;
     const style = document.createElement('style');
     style.textContent = `
         ${OUTER_CONTAINER} { 
-            min-width: 800px;
-            max-width: 1440px;
+            margin: auto;
+            min-width: 1000px;
+            max-width: 1600px;
         }
-        ${CONTAINER} { max-width: none }
+        ${CONTAINER} { width: 100% }
         ${INNER_CONTAINER} { max-width: none }
         ${BOT_BUBBLE} { max-width: none }
         ${HUMAN_BUBBLE} { max-width: none }
     `;
     document.head.appendChild(style);
     document.head.appendChild(outerStyle);
+    addResizeHandle();
     window.history.pushState = function() {
+        clearInterval(retryInterval);
         addResizeHandle();
         return pushState.apply(history, arguments);
     };
