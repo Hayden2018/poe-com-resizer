@@ -75,8 +75,8 @@ window.onload = () => {
         ${BOT_BUBBLE} { max-width: none }
         ${HUMAN_BUBBLE} { max-width: none }
     `;
-    document.head.appendChild(style);
-    document.head.appendChild(outerStyle);
+    document.body.appendChild(style);
+    document.body.appendChild(outerStyle);
     addResizeHandle();
     window.history.pushState = function() {
         clearInterval(retryInterval);
