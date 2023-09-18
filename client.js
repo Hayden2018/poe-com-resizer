@@ -1,6 +1,6 @@
 const OUTER_CONTAINER = '.SidebarLayout_layoutWrapper__P7Wz9';
 const CONTAINER = '.MainColumn_column__z1_q8';
-const INNER_CONTAINER = '.ChatPageMain_container__1aaCT.ChatPageMain_narrowChatPage__fWwXM';
+const INNER_CONTAINER = '.ChatPageMain_container__1aaCT';
 const BOT_BUBBLE = '.Message_botMessageBubble__CPGMI';
 const HUMAN_BUBBLE = '.Message_humanMessageBubble__Nld4j';
 
