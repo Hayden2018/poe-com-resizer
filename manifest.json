@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Poe.com Resizer",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "description": "Better layout for Poe.com and allow for resizable dialog area",
     "action": {
         "default_popup": "popup.html",
