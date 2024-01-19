@@ -17,19 +17,29 @@ function addResizeHandle() {
         if (outerBox.lastElementChild.id !== 'resize-handle') {
             clearInterval(retryInterval);
 
+            const existingLeftBorder = document.querySelector('#left-border');
+            if (existingLeftBorder) existingLeftBorder.remove();
+    
+            const leftBorder = document.createElement('div');
+            leftBorder.style.height = '100vh';
+            leftBorder.style.width = '1px';
+            leftBorder.style.background = '#929292';
+            leftBorder.id = 'left-border';
+            outerBox.insertBefore(leftBorder, outerBox.firstChild);
+
             const existingHandle = document.querySelector('#resize-handle');
             if (existingHandle) existingHandle.remove();
 
             const handleDot = document.createElement('div');
             handleDot.style.height = '38px';
-            handleDot.style.width = '5px';
+            handleDot.style.width = '4px';
             handleDot.style.background = '#ececec';
             handleDot.style.borderRadius = '2px';
             handleDot.style.margin= 'calc(50vh - 38px) 3px';
 
             const handle = document.createElement('div');
             handle.style.height = '100vh';
-            handle.style.width = '11px';
+            handle.style.width = '10px';
             handle.style.background = '#7676d0';
             handle.style.cursor = 'ew-resize';
             handle.id = 'resize-handle';
