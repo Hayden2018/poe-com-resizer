@@ -1,3 +1,8 @@
+const OUTER_CONTAINER = '.SidebarLayout_layoutWrapper__mPYi4';
+const CONTAINER = '.MainColumn_column__UEunw';
+const INNER_CONTAINER = '.ChatPageMain_container__2O2h8';
+const BOT_BUBBLE = '.Message_botMessageBubble__aYctV';
+const HUMAN_BUBBLE = '.Message_humanMessageBubble__DtRxA';
 const LEFT_SIDEBAR = '.MainLeftSidebar_sidebar__C6HpK';
 const SCROLL_CONTAINER = '.MainColumn_scrollSection__A9NHB';
 
@@ -26,11 +31,37 @@ async function applyScrollBarConfig() {
     }
 }
 
+async function initializeStyle() {
+    const cfg = await chrome.storage.local.get('resizedWidth');
+    const chatStyle = document.createElement('style');
+    chatStyle.textContent = `
+        ${OUTER_CONTAINER} { 
+            margin: auto;
+            min-width: 1000px;
+            max-width: ${cfg.resizedWidth ?? 1600}px;
+        }
+        ${CONTAINER} { width: 100% }
+        ${INNER_CONTAINER} { max-width: none }
+        ${BOT_BUBBLE} { max-width: none }
+        ${HUMAN_BUBBLE} { max-width: none }
+    `;
+    document.body.appendChild(chatStyle);
+}
+
+initializeStyle();
+applyScrollBarConfig();
+
 const script = document.createElement('script');
 script.setAttribute('type', 'text/javascript');
 script.setAttribute('src', chrome.runtime.getURL('client.js'));
 document.head.appendChild(script);
-applyScrollBarConfig();
+
+window.addEventListener('message', async (event) => {
+    if (event.data.type === 'POE_RESIZED') {
+        const { resizedWidth } = event.data;
+        await chrome.storage.local.set({ resizedWidth });
+    }
+});
 
 chrome.runtime.onMessage.addListener(
     (request, _, sendResponse) => {

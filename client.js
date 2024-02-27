@@ -67,31 +67,17 @@ function addResizeHandle() {
             
             document.addEventListener('mouseup', async function () {
                 isDragging = false;
-                await chrome.storage.local.set({ resizedWidth });
+                window.postMessage({ type: 'POE_RESIZED', resizedWidth }, '*');
             });
         }
     }, 20);
 }
 
-// Apply the layout change onload
-window.onload = async() => {
-    const pushState = history.pushState;
-    const style = document.createElement('style');
-    const cfg = await chrome.storage.local.get("resizedWidth");
-    style.textContent = `
-        ${OUTER_CONTAINER} { 
-            margin: auto;
-            min-width: 1000px;
-            max-width: ${cfg.resizedWidth ?? 1600}px;
-        }
-        ${CONTAINER} { width: 100% }
-        ${INNER_CONTAINER} { max-width: none }
-        ${BOT_BUBBLE} { max-width: none }
-        ${HUMAN_BUBBLE} { max-width: none }
-    `;
-    document.body.appendChild(style);
+window.onload = () => {
+    const pushState = window.history.pushState;
     document.body.appendChild(outerStyle);
     addResizeHandle();
+
     window.history.pushState = function() {
         clearInterval(retryInterval);
         addResizeHandle();
