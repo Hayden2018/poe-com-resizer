@@ -19,7 +19,7 @@
     "content_scripts": [
         {
             "matches": ["https://*.poe.com/*"],
-            "js": ["content.js"]
+            "js": ["content.js", "client.js"]
         }
     ],
     "permissions": [
