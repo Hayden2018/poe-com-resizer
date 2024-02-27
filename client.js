@@ -49,6 +49,7 @@ function addResizeHandle() {
             let isDragging = false;
             let startX;
             let baseX;
+            let resizedWidth;
             
             handle.addEventListener('mousedown', function (e) {
                 isDragging = true;
@@ -60,25 +61,28 @@ function addResizeHandle() {
                 if (isDragging) {
                     const newWidth = baseX + 2 * (e.clientX - startX);
                     outerStyle.textContent = `${OUTER_CONTAINER} { max-width: ${newWidth}px }`;
+                    resizedWidth = newWidth;
                 }
             });
             
-            document.addEventListener('mouseup', function () {
+            document.addEventListener('mouseup', async function () {
                 isDragging = false;
+                await chrome.storage.local.set({ resizedWidth });
             });
         }
     }, 20);
 }
 
 // Apply the layout change onload
-window.onload = () => {
+window.onload = async() => {
     const pushState = history.pushState;
     const style = document.createElement('style');
+    const cfg = await chrome.storage.local.get("resizedWidth");
     style.textContent = `
         ${OUTER_CONTAINER} { 
             margin: auto;
             min-width: 1000px;
-            max-width: 1600px;
+            max-width: ${cfg.resizedWidth ?? 1600}px;
         }
         ${CONTAINER} { width: 100% }
         ${INNER_CONTAINER} { max-width: none }
