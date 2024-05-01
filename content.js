@@ -1,6 +1,5 @@
 const OUTER_CONTAINER = '.SidebarLayout_layoutWrapper__mPYi4';
-const CONTAINER = '.MainColumn_column__UEunw';
-const INNER_CONTAINER = '.ChatPageMain_container__2O2h8';
+const CONTAINER = '.InfiniteScroll_container__PHsd4';
 const BOT_BUBBLE = '.Message_botMessageBubble__aYctV';
 const HUMAN_BUBBLE = '.Message_humanMessageBubble__DtRxA';
 const LEFT_SIDEBAR = '.MainLeftSidebar_sidebar__C6HpK';
@@ -41,7 +40,6 @@ async function initializeStyle() {
             max-width: ${cfg.resizedWidth ?? 1600}px;
         }
         ${CONTAINER} { width: 100% }
-        ${INNER_CONTAINER} { max-width: none }
         ${BOT_BUBBLE} { max-width: none }
         ${HUMAN_BUBBLE} { max-width: none }
     `;
