@@ -3,10 +3,10 @@ const SETTING_CONTAINER = '.MainColumn_column__UEunw';
 const CHAT_CONTAINER = '.InfiniteScroll_container__PHsd4';
 const NEW_CHAT_CONTAINER = '.ChatMessagesView_emptyView__HqDf7';
 const FOOTER_CONTAINER = '.ChatPageMainFooter_footerInner__BEj26';
-const BOT_BUBBLE = '.Message_botMessageBubble__aYctV';
-const HUMAN_BUBBLE = '.Message_humanMessageBubble__DtRxA';
+const BOT_BUBBLE = '.Message_leftSideMessageBubble__VPdk6';
+const HUMAN_BUBBLE = '.Message_rightSideMessageBubble__ioa_i';
 const LEFT_SIDEBAR = '.MainLeftSidebar_sidebar__C6HpK';
-const SCROLL_CONTAINER = '.MainColumn_scrollSection__A9NHB';
+const SCROLL_CONTAINER = '.ChatMessagesScrollWrapper_scrollableContainerWrapper__x8H60';
 
 const scrollStyle = document.createElement('style');
 scrollStyle.textContent = `
