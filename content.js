@@ -49,8 +49,8 @@ async function initializeStyle() {
             width: 100%;
             max-width: none;
         }
-        ${BOT_BUBBLE} { max-width: none }
-        ${HUMAN_BUBBLE} { max-width: none }
+        ${BOT_BUBBLE} { max-width: 100% }
+        ${HUMAN_BUBBLE} { max-width: 100% }
     `;
     document.body.appendChild(chatStyle);
 }
