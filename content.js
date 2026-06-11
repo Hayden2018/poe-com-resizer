@@ -40,7 +40,7 @@ async function initializeStyle() {
         ${OUTER_CONTAINER} { 
             margin: auto;
             min-width: 1000px;
-            max-width: ${cfg.resizedWidth ?? 1600}px;
+            max-width: ${cfg.resizedWidth ?? 1360}px;
         }
         ${SETTING_CONTAINER} { width: 100% }
         ${FOOTER_CONTAINER} { width: 100% }
